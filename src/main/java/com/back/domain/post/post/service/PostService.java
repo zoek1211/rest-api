@@ -35,4 +35,8 @@ public class PostService {
     public boolean deleteComment(Post post, PostComment postComment) {
         return post.deleteComment(postComment);
     }
+
+    public void delete(Post post) {
+        postRepository.delete(post);
+    }
 }
