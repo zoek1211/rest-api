@@ -1,4 +1,4 @@
-package com.back.global.initData;
+package com.back.global.sampleData;
 
 import com.back.domain.post.post.entity.Post;
 import com.back.domain.post.post.service.PostService;
@@ -12,21 +12,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 @RequiredArgsConstructor
-public class BaseInitData {
+public class SampleData {
     @Autowired
     @Lazy
-    private BaseInitData self;
+    private SampleData self;
     private final PostService postService;
 
     @Bean
-    ApplicationRunner baseInitDataApplicationRunner() {
+    ApplicationRunner sampleDataApplicationRunner() {
         return args -> {
-            self.work1();
+            self.makeSampleData();
         };
     }
 
     @Transactional
-    public void work1() {
+    public void makeSampleData() {
         if (postService.count() > 0) return;
 
         Post post1 = postService.write("제목 1", "내용 1");

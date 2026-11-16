@@ -4,6 +4,7 @@ import com.back.domain.post.post.entity.Post;
 import com.back.domain.post.post.repository.PostRepository;
 import com.back.domain.post.postComment.entity.PostComment;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class PostService {
     }
 
     public List<Post> findAll() {
-        return postRepository.findAll();
+        return postRepository.findAll(Sort.by("id"));
     }
 
     public boolean deleteComment(Post post, PostComment postComment) {
