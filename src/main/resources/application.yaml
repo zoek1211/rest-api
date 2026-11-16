@@ -1,25 +1,28 @@
+# 모든 프로필에 공통으로 적용되는 설정입니다.
+# 프로필별 설정(application-dev.yaml, application-test.yaml)이 이 파일의 값을 덮어쓰거나 보탭니다.
 spring:
   application:
     name: back
   profiles:
-    active: dev
+    active: dev            # 기본 프로필. 따로 지정하지 않으면 application-dev.yaml이 함께 적용된다.
   output:
     ansi:
-      enabled: always
+      enabled: always      # 콘솔 로그에 색을 입힌다.
   datasource:
     hikari:
-      auto-commit: false
+      auto-commit: false   # 커넥션 풀의 자동 커밋을 끈다. 커밋 시점은 스프링 트랜잭션(@Transactional)이 정한다.
   jpa:
-    show-sql: true
+    show-sql: true         # 실행되는 SQL을 콘솔에 출력한다 (공부할 때 JPA가 어떤 쿼리를 날리는지 보기 좋다).
     hibernate:
-      ddl-auto: update
+      ddl-auto: update     # 엔티티 구조를 보고 테이블을 자동으로 만들거나 컬럼을 추가한다(기존 데이터는 유지).
+                           # 컬럼 이름을 바꾸면 옛 컬럼이 남으므로 db_dev.* 파일을 지우고 다시 실행하는 게 깔끔하다.
     properties:
       hibernate:
-        format_sql: true
-        highlight_sql: true
-        use_sql_comments: true
+        format_sql: true        # SQL을 여러 줄로 보기 좋게 출력
+        highlight_sql: true     # SQL 키워드에 색 입히기
+        use_sql_comments: true  # 어떤 엔티티 작업에서 나온 쿼리인지 주석(/* insert for ... */)을 달아 준다
 logging:
   level:
-    org.hibernate.orm.jdbc.bind: TRACE
-    org.hibernate.orm.jdbc.extract: TRACE
-    org.springframework.transaction.interceptor: TRACE
+    org.hibernate.orm.jdbc.bind: TRACE                 # SQL의 ? 자리에 실제로 들어간 값을 출력
+    org.hibernate.orm.jdbc.extract: TRACE              # select 결과로 읽어 온 값을 출력
+    org.springframework.transaction.interceptor: TRACE # 트랜잭션 시작/커밋 로그 출력

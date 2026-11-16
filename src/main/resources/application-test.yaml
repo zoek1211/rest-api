@@ -1,5 +1,8 @@
+# 테스트(test) 프로필 설정입니다. 테스트 클래스의 @ActiveProfiles("test")로 적용됩니다.
 spring:
   datasource:
+    # 인메모리 DB: 파일을 만들지 않고 메모리에만 존재한다. 테스트 실행이 끝나면 사라진다.
+    # 개발용 db_dev 데이터를 건드리지 않고, 매번 깨끗한 상태(샘플데이터만 있는 상태)에서 테스트할 수 있다.
     url: jdbc:h2:mem:db_test;MODE=MySQL
     username: sa
     password:
